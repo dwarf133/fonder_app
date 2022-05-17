@@ -6,7 +6,7 @@ from fonds import Fond
 import os
 
 
-SAVE_FILE = 'kek.json'
+SAVE_FILE = 'save.json'
 LOG_FILE = 'out.log'
 MENU_STRUCT = [
     ['Настройки', ['Выбрать файл ссохранения', 'Выбрать логфайл', 'Обнулить данные']], 
@@ -19,12 +19,20 @@ ABOUT = """
 Проект распространяется с открытым исходным кодом.
 """
 
+try:
+    with open(SAVE_FILE, 'r', encoding='UTF8') as read_file: #reading savefile
+        data = json.load(read_file)
+except:
+    sg.popup_ok(f"Отсутствует файл сохранения!\nСтандартное расположение: {os.path.abspath(os.path.curdir)}/save.json")
 
-with open(SAVE_FILE, 'r', encoding='UTF8') as read_file: #reading savefile
-    data = json.load(read_file)
-
-with open(LOG_FILE, 'r', encoding='UTF8') as log: #reading logfile
-    history = log.readlines()
+try:
+    with open(LOG_FILE, 'r', encoding='UTF8') as log: #reading logfile
+        history = log.readlines()
+except:
+    with open(LOG_FILE, 'x', encoding='UTF8') as log:
+        log.writelines(['Создан лог файл\n'])
+    with open(LOG_FILE, 'r', encoding='UTF8') as log: #reading logfile
+        history = log.readlines()
 
 for tmp in data:
     Fond(tmp["fond_name"], tmp["percentage"], tmp["sum"])

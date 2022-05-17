@@ -1,4 +1,5 @@
 /dist
 /build
-kek.json
+/__pycache__
+save.json
 out.log
