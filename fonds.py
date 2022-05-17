@@ -16,7 +16,9 @@ class Fond(object):
     def addMoney(x):
         for tmp in Fond.fond_list:
             tmp.sum += tmp.perc * x
+            tmp.sum = round(tmp.sum)
         Fond.total += x
+        Fond.total = round(Fond.total)
         return True, f"ВНЕСЕНО: {x}\n"
 
     def takeMoney(name, sum):
@@ -27,6 +29,12 @@ class Fond(object):
                     Fond.total -= sum
                     return True, f"СПИСАНО: {sum} из {name}\n"
                 else: return False, "Недостаточно средств"
+    
+    def clear():
+        for x in Fond.fond_list:
+            x.sum = 0
+        Fond.total = 0
+        return True, "Данные обнулены\n"
                 
         
     
