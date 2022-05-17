@@ -1,5 +1,5 @@
-/dist
-/build
-/__pycache__
-save.json
+dist/
+build/
+__pycache__/
+.DS_Store
 out.log
